@@ -465,21 +465,23 @@ public class FloatingActionMenu extends ViewGroup {
                 continue;
             }
 
-            final FloatingActionButton fab = (FloatingActionButton) getChildAt(i);
+            if (getChildAt(i) instanceof FloatingActionButton) {
+                final FloatingActionButton fab = (FloatingActionButton) getChildAt(i);
 
-            if (fab.getTag(R.id.fab_label) != null) {
-                continue;
-            }
+                if (fab.getTag(R.id.fab_label) != null) {
+                    continue;
+                }
 
-            addLabel(fab);
+                addLabel(fab);
 
-            if (fab == mMenuButton) {
-                mMenuButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        toggle(mIsAnimated);
-                    }
-                });
+                if (fab == mMenuButton) {
+                    mMenuButton.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toggle(mIsAnimated);
+                        }
+                    });
+                }
             }
         }
     }
