@@ -23,11 +23,15 @@ android {
     }
 }
 
+ext {
+    supportLibVersion = project.hasProperty("defaultSupportLibVersion") ? defaultSupportLibVersion : "23.3.0"
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.android.support:support-v4:23.2.0'
-    compile 'com.android.support:design:23.2.0'
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    compile "com.android.support:support-v4:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
     compile 'com.nineoldandroids:library:2.4.0'
 }
 
