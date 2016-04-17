@@ -1,6 +1,5 @@
 package com.github.clans.fab;
 
-import android.animation.LayoutTransition;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -26,18 +25,18 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
-import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.support.v4.view.ViewCompat;
 
 public class FloatingActionButton extends ImageButton {
 
@@ -164,7 +163,7 @@ public class FloatingActionButton extends ImageButton {
             }
         }
 
-//        updateBackground();
+        //        updateBackground();
         setClickable(true);
     }
 
@@ -225,7 +224,7 @@ public class FloatingActionButton extends ImageButton {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        //        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(calculateMeasuredWidth(), calculateMeasuredHeight());
     }
 
@@ -550,7 +549,9 @@ public class FloatingActionButton extends ImageButton {
     public boolean onTouchEvent(MotionEvent event) {
         if (mClickListener != null && isEnabled()) {
             Label label = (Label) getTag(R.id.fab_label);
-            if (label == null) return super.onTouchEvent(event);
+            if (label == null) {
+                return super.onTouchEvent(event);
+            }
 
             int action = event.getAction();
             switch (action) {
@@ -680,7 +681,7 @@ public class FloatingActionButton extends ImageButton {
         }
 
         private void init(FloatingActionButton view) {
-            ViewCompat.setLayerType(view,ViewCompat.LAYER_TYPE_SOFTWARE, null);
+            ViewCompat.setLayerType(view, ViewCompat.LAYER_TYPE_SOFTWARE, null);
             mPaint.setStyle(Paint.Style.FILL);
             mPaint.setColor(mColorNormal);
 
@@ -801,7 +802,7 @@ public class FloatingActionButton extends ImageButton {
 
     @Override
     public void setImageResource(int resId) {
-        Drawable drawable = getResources().getDrawable(resId);
+        Drawable drawable = ContextCompat.getDrawable(getContext(), resId);
         if (mIcon != drawable) {
             mIcon = drawable;
             updateBackground();
@@ -853,7 +854,7 @@ public class FloatingActionButton extends ImageButton {
     }
 
     public void setColorNormalResId(int colorResId) {
-        setColorNormal(getResources().getColor(colorResId));
+        setColorNormal(ContextCompat.getColor(getContext(), colorResId));
     }
 
     public int getColorNormal() {
@@ -868,7 +869,7 @@ public class FloatingActionButton extends ImageButton {
     }
 
     public void setColorPressedResId(int colorResId) {
-        setColorPressed(getResources().getColor(colorResId));
+        setColorPressed(ContextCompat.getColor(getContext(), colorResId));
     }
 
     public int getColorPressed() {
@@ -883,7 +884,7 @@ public class FloatingActionButton extends ImageButton {
     }
 
     public void setColorRippleResId(int colorResId) {
-        setColorRipple(getResources().getColor(colorResId));
+        setColorRipple(ContextCompat.getColor(getContext(), colorResId));
     }
 
     public int getColorRipple() {
@@ -898,7 +899,7 @@ public class FloatingActionButton extends ImageButton {
     }
 
     public void setColorDisabledResId(int colorResId) {
-        setColorDisabled(getResources().getColor(colorResId));
+        setColorDisabled(ContextCompat.getColor(getContext(), colorResId));
     }
 
     public int getColorDisabled() {
@@ -1013,7 +1014,7 @@ public class FloatingActionButton extends ImageButton {
     }
 
     public void setShadowColorResource(int colorResId) {
-        int shadowColor = getResources().getColor(colorResId);
+        int shadowColor = ContextCompat.getColor(getContext(), colorResId);
         if (mShadowColor != shadowColor) {
             mShadowColor = shadowColor;
             updateBackground();
@@ -1127,7 +1128,7 @@ public class FloatingActionButton extends ImageButton {
 
     /**
      * Sets the shadow color and radius to mimic the native elevation.
-     *
+     * <p>
      * <p><b>API 21+</b>: Sets the native elevation of this view, in pixels. Updates margins to
      * make the view hold its position in layout across different platform versions.</p>
      */
@@ -1184,7 +1185,9 @@ public class FloatingActionButton extends ImageButton {
     }
 
     public synchronized void setProgress(int progress, boolean animate) {
-        if (mProgressIndeterminate) return;
+        if (mProgressIndeterminate) {
+            return;
+        }
 
         mProgress = progress;
         mAnimateProgress = animate;
@@ -1287,7 +1290,9 @@ public class FloatingActionButton extends ImageButton {
     }
 
     public void showButtonInMenu(boolean animate) {
-        if (getVisibility() == VISIBLE) return;
+        if (getVisibility() == VISIBLE) {
+            return;
+        }
 
         setVisibility(INVISIBLE);
         show(animate);
