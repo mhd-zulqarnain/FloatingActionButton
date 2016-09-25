@@ -1,5 +1,6 @@
 package com.github.clans.fab;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -488,6 +489,7 @@ public class FloatingActionMenu extends ViewGroup {
         }
     }
 
+    @SuppressLint("Deprecation")
     private void addLabel(FloatingActionButton fab) {
         String text = fab.getLabelText();
 
@@ -950,7 +952,7 @@ public class FloatingActionMenu extends ViewGroup {
     }
 
     public void setMenuButtonColorNormalResId(int colorResId) {
-        mMenuColorNormal = getResources().getColor(colorResId);
+        mMenuColorNormal = ContextCompat.getColor(getContext(), colorResId);
         mMenuButton.setColorNormalResId(colorResId);
     }
 
@@ -964,7 +966,7 @@ public class FloatingActionMenu extends ViewGroup {
     }
 
     public void setMenuButtonColorPressedResId(int colorResId) {
-        mMenuColorPressed = getResources().getColor(colorResId);
+        mMenuColorPressed = ContextCompat.getColor(getContext(), colorResId);
         mMenuButton.setColorPressedResId(colorResId);
     }
 
@@ -978,7 +980,7 @@ public class FloatingActionMenu extends ViewGroup {
     }
 
     public void setMenuButtonColorRippleResId(int colorResId) {
-        mMenuColorRipple = getResources().getColor(colorResId);
+        mMenuColorRipple = ContextCompat.getColor(getContext(), colorResId);
         mMenuButton.setColorRippleResId(colorResId);
     }
 
